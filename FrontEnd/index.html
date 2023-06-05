@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/a177793390.js" crossorigin="anonymous"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
@@ -11,13 +12,54 @@
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+	<!--Ajout Barre d'edition-->
+
+	<div class="header-edit" class="edition">
+		<div><i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p><button class="button">publier les changements</button></div>
+	</div>
+	
+	<!--Modale-->
+
+	<section id="modale-window">
+		<div class="overlay modale-triger"></div>
+		<div class="modale">
+			<i class="fa-solid fa-xmark close-modal modale-triger"></i>
+				<h2 class="modalTitle">Galerie photo</h2>
+            <div class="modal-gallery"></div>
+			<hr>
+			<button class="button-add-gallery">Ajouter une photo</button>
+			<a href="#" class="delete-modale">Supprimer la galerie</a>
+		</div>
+
+		<div class="modale-add">
+			<i class="arrow-modal fa-solid fa-arrow-left-long"></i>
+			<i class="close-modal modale-triger fa-solid fa-xmark"></i>
+			<h2 class="modalTitle">Ajout photo</h2>
+			<form class="form-upload-img">
+				<label for="file" class="form-add-photo">
+					<i class="fa-regular fa-image"></i>
+					<span class="button-add-picture">+ Ajouter photo</span>
+                    <span class="format-picture">jpg, png: 4mo max</span>
+				</label>
+				<label for="title-picture">Titre</label>
+                <input type="text" id="title-picture" name="title-picture">
+                <label for="categories">Catégories</label>
+                <select name="categories" id="categories"></select>
+            <hr>
+                <button class="button-validate" disabled >Valider</button>
+
+			</form>
+		</div>
+	</section>
+		
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li class="liLogin"><a href="./login.html" class="login">Login</a></li>
+			<li class="liLogout"><a href="./index.html"class="Logout">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -26,63 +68,31 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<div class="modify-img">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<p>modifier</p>
 		</figure>
 		<article>
+			<div class="modify-article">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<p>modifier</p>
+			</div>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+
 	<section id="portfolio">
+		<div class="modify">
 		<h2>Mes Projets</h2>
-		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+		<div class="modify-content">
+		<i class="fa-regular fa-pen-to-square"></i><p class="modalLink modale-triger">modifier</p>
 		</div>
 	</section>
+
+	
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -105,5 +115,6 @@
 		</ul>
 	</nav>
 </footer>
+<script src="./assets/index.js"></script>
 </body>
 </html>
