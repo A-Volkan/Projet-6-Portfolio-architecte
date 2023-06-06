@@ -26,7 +26,7 @@ const loginUser = async () => {
     }
     //condition si l'un des deux champ est vide une erreur est lancé//
     if (emailLogin == "" || passwordLogin == "") {
-        window.alert("Veuillez remplir tous les champs.");
+        showToast("Vérifiez que les champs E - mail et Mot de passe soient bien remplis.")
         throw new Error("Vérifiez que les champs E - mail et Mot de passe soient bien remplis.");
 
     }
@@ -54,8 +54,8 @@ const loginUser = async () => {
                     })
                 //condi alternative si la reponse n'est pas un succès// 
             } else if (!response.ok) {
-                //affiche une fenetre d'lalerte//
-                window.alert("identifiant ou mot de passe est incorrect");
+                //affiche une notification d'erreur//
+                showToast("identifiant ou mot de passe est incorrect");
                 //lance une nouvelle ligne d'erreur dans la console//
                 throw new Error("l’identifiant ou le mot de passe est incorrect");
 
@@ -66,3 +66,13 @@ const loginUser = async () => {
         });
 };
 
+//ajout d'une notification en cas d'erreur//
+//fonction showtoast avec un message en parametre//
+const showToast = (message) => {
+    const toast = document.getElementById("alert_toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000)
+}
