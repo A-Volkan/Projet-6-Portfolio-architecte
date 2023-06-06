@@ -237,11 +237,10 @@ main {
 .toast {
 	position: fixed;
 	top: 130px;
-	right: 20px;
 	padding: 10px;
 	background-color: #d65353;
 	color: white;
-	font-size: 10px;
+	font-size: 12px;
 	border-radius: 5px;
 	visibility: hidden;
 	opacity: 0;

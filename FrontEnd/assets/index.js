@@ -223,7 +223,7 @@ async function deleteProject(e) {
             imgContainer.parentElement.remove();
             getWorks();
         } else {
-            throw new Error("La session a expirée, veuillez vous reconnecter");
+            throw new Error("Veuillez vous reconnecter");
         }
     } catch (error) {
         alert(error.message);
@@ -306,11 +306,11 @@ const selectCategories = document.getElementById("categories");
 input_file.addEventListener("change", previewFile);
 
 function previewFile(e) {
-    const file_extension_regex = /\.(jpe?g|png)$/i;
-    if (this.files.length === 0 || !file_extension_regex.test(this.files[0].name)) {
-        alert("Format non pris en charge, merci de choisir une autre photo");
-
-        return;
+    const file_extension_regex = /\.(jpe?g|png)$/i;//verifie si le fichier correspond au format accepté//
+    const max_file_size_in_bytes = 4 * 1024 * 1024; //4mo taille max autorisé//
+    if (this.files.length === 0 || !file_extension_regex.test(this.files[0].name) || this.files[0].size > max_file_size_in_bytes) {
+        showToast("Format non pris en charge, merci de choisir une autre photo");
+        return;//pour arreter l'execution de la fonction si le format n'est pas bon//
     }
 
     let file = e.target.files[0];
@@ -373,7 +373,7 @@ async function addProject(e) {
 
                 firstModal()
             } else if (!response.ok) {
-                alert('La session a expirée, veuillez vous reconnecter');
+                alert("Erreur le projet n'as pas pu etre ajouté");
                 document.location.href = ("login.html");
             }
         })
@@ -395,6 +395,17 @@ function logout() {
 const logoutButton = document.querySelector('.liLogout');
 if (logoutButton !== null) {
     logoutButton.addEventListener('click', logout);
+}
+
+//ajout d'une notification en cas d'erreur//
+//fonction showtoast avec un message en parametre//
+const showToast = (message) => {
+    const toast = document.getElementById("alert_toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000)
 }
 
 

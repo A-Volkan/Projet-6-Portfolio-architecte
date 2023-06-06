@@ -55,7 +55,7 @@ const loginUser = async () => {
                 //condi alternative si la reponse n'est pas un succès// 
             } else if (!response.ok) {
                 //affiche une notification d'erreur//
-                showToast("identifiant ou mot de passe est incorrect");
+                showToast("l'identifiant ou le mot de passe est incorrect");
                 //lance une nouvelle ligne d'erreur dans la console//
                 throw new Error("l’identifiant ou le mot de passe est incorrect");
 
