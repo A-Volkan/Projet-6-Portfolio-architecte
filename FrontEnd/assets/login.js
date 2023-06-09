@@ -76,3 +76,26 @@ const showToast = (message) => {
         toast.classList.remove("show");
     }, 3000)
 }
+
+//ajout d'une fonction qui permet d'afficher/cacher le mdp //
+
+const togglePassword = () => {
+    const passwordInput = document.getElementById("password");
+    const toggleBtn = document.getElementById("togglebtn");
+    const eyeIcon = toggleBtn.querySelector("i");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+
+    } else {
+        passwordInput.type = "password";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+
+    }
+}
+//ecouteur d'evenement pour appeler la fonction au click//
+const toggleBtn = document.getElementById("togglebtn");
+toggleBtn.addEventListener("click", togglePassword);

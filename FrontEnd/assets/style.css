@@ -250,6 +250,32 @@ main {
 	visibility: visible;
 	opacity: 1;
 }
+.password-wrapper {
+	position: relative;
+}
+.password-wrapper #togglebtn {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.password-wrapper #togglebtn i {
+	color: #999;
+	top: 50%;
+	right: 10px;
+	position: absolute;
+	transform: translateY(-50%);
+}
+.password-wrapper #togglebtn:focus {
+	outline: none;
+}
+.password-wrapper #togglebtn:hover i {
+	color: #B1663C;
+}
 
 
 /*********haut page mode edit / modify*************/
