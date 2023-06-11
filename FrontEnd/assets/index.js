@@ -165,7 +165,7 @@ window.addEventListener('DOMContentLoaded', hideEdit);
 const modaleWindow = document.querySelector("#modale-window");
 const modaleTriggers = document.querySelectorAll(".modale-triger");
 
-//ajout d'un ecouteur devent de clic a chaque element modale-triger//
+//ajout d'un ecouteur d'event de clic a chaque element modale-triger//
 modaleTriggers.forEach(triger => triger.addEventListener("click", toggleModal))
 //fonction pour changer l'etat de la modale//
 function toggleModal() {
@@ -174,8 +174,8 @@ function toggleModal() {
 }
 
 const modalLink = document.querySelector(".modalLink");
-if (modalLink !== null)
-    modalLink.addEventListener("click", firstModal);
+if (modalLink !== null) //si lelement a ete trouvé//
+    modalLink.addEventListener("click", firstModal);//appel de la fonction firstModal au click si la condition est bien rempli//
 
 
 
@@ -185,7 +185,7 @@ function createGalleryModal(allGallery) {
     const modalGallery = document.querySelector('.modal-gallery');
     if (modalGallery !== null) {
         modalGallery.innerHTML = allGallery
-            .map(
+            .map(//parcourir chaque objet//
                 (img) => `
             <div class="img_modal">
               <img src=${img.imageUrl} alt=${img.title} data-id=${img.id}>
