@@ -134,7 +134,7 @@ li:hover {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
-	margin-top: 92px;
+	
 	
 }
 
@@ -154,6 +154,8 @@ li:hover {
 	margin: 50px auto;
 	justify-content: center;
 	margin-top: 30px;
+	
+	
 }
 
 .button {
@@ -170,6 +172,7 @@ li:hover {
 	text-align: center;
 	padding: 3px 20px;
 	cursor: pointer;
+	
 
 }
 
@@ -179,6 +182,7 @@ li:hover {
 	color: #fff;
 
 }
+
 /*********login************/
 .login {
 	text-decoration: none;

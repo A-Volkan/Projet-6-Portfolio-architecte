@@ -32,61 +32,64 @@ const getWorks = async () => {
 
 //fonction qui va permettre de creer les categories//
 
-
 const createCategory = () => {
-    //creer un nouvel element div avec la class filter et l'ajouter a la fin du noeud en lian la classe filter au parent portfolio//
-    const filter = document.createElement("div");
-    filter.classList.add("filter");
-    portfolio.appendChild(filter);
-    //creation fonction pour les bouton //
-    const createButton = (category) => {
-        const button = document.createElement("div");
-        button.classList.add("button");
-        button.setAttribute("id", category.name);
-        button.textContent = category.name;
-        return button;
-    };
-    //fonction qui filtre les element de la gallerie en fonction du filtre choisi//
-    const createGalleryWithFilter = (categoryId) => {
-        const allGalleryFilter = allGallery.filter((element) => element.categoryId === categoryId);
-        createGallery(allGalleryFilter);
-    };
-    // fonction qui permet de selectionner le bouton filtre utiliser seulement et d'enlever la class selected au autres//
-    const selectButton = (button) => {
-        buttonFilter.forEach((button) => button.classList.remove("selected"));
-        button.classList.add("selected");
-    };
-    //array avec fonction createbutton , objet "tous" en argument//
-    //boucle for qui parcour chaque categorie du tableau //
-    //appel de la fonction createbutton dans une var button avec en argument la categorie pour creer le boutton qui correspond a cette catego//
-    const buttonFilter = [createButton({ name: "Tous" })];
-    for (let i = 0; i < allCategorie.length; i++) {
-        const category = allCategorie[i];
-        const button = createButton(category);
-        buttonFilter.push(button);//methode push pour ajouter le bouton créé a chaque iteration de la boucle dans le tableau//
-    }
-    //methode forEach pour chaque element une fonction est executé/
-    buttonFilter.forEach((button, i) => {
-        button.addEventListener("click", () => {
-            //condition si l'indice est different de 0 alors l'utilisateur a cliquer sur un bouton autre que Tous//
-            if (i !== 0) {
-                const categoryName = button.getAttribute("id");//recup l id du bouton cliquer et le stock dans la var//
-                const category = allCategorie.find((category) => category.name === categoryName);//cherche la catego qui correspond a la valeur recup precedement et la stock dans la var//
-                //condi verifie si la categorie a ete trouvé que le bouton cliquer correspond bien a une categorie //
-                if (category) {
-                    const categoryId = category.id;
-                    createGalleryWithFilter(categoryId);//filtre les elements de la galerie en fonction de lid de la catego//
-                }
-                //si l'indice i=0 alors l'user a cliquer sur le bouton tous , tout les elements de la galerie seront donc affichés//
-            } else {
-                createGallery(allGallery);
-            }
-            selectButton(button);//remplis le bouton cliqué//
-        });
-        filter.appendChild(button);//ajoute button au parent filter// 
-    });
-};
+    const userToken = localStorage.getItem('user');
+    if (!userToken) {
+        //creer un nouvel element div avec la class filter et l'ajouter a la fin du noeud en lian la classe filter au parent portfolio//
+        const filter = document.createElement("div");
+        filter.classList.add("filter");
+        portfolio.appendChild(filter);
 
+        //creation fonction pour les bouton //
+        const createButton = (category) => {
+            const button = document.createElement("div");
+            button.classList.add("button");
+            button.setAttribute("id", category.name);
+            button.textContent = category.name;
+            return button;
+        };
+        //fonction qui filtre les element de la gallerie en fonction du filtre choisi//
+        const createGalleryWithFilter = (categoryId) => {
+            const allGalleryFilter = allGallery.filter((element) => element.categoryId === categoryId);//les elements dont l'id est egal a la valeur de la variable categorie id//
+            createGallery(allGalleryFilter);
+        };
+        // fonction qui permet de selectionner le bouton filtre utiliser seulement et d'enlever la class selected au autres//
+        const selectButton = (button) => {
+            buttonFilter.forEach((button) => button.classList.remove("selected"));
+            button.classList.add("selected");
+        };
+        //array avec fonction createbutton , objet "tous" en argument//
+        //boucle for qui parcour chaque categorie du tableau //
+        //appel de la fonction createbutton dans une var button avec en argument la categorie pour creer le boutton qui correspond a cette catego//
+        const buttonFilter = [createButton({ name: "Tous" })];
+        for (let i = 0; i < allCategorie.length; i++) {
+            const category = allCategorie[i];
+            const button = createButton(category);
+            buttonFilter.push(button);//methode push pour ajouter le bouton créé a chaque iteration de la boucle dans le tableau//
+        }
+        //methode forEach pour chaque element une fonction est executé/
+        buttonFilter.forEach((button, i) => {
+            button.addEventListener("click", () => {
+                //condition si l'indice est different de 0 alors l'utilisateur a cliquer sur un bouton autre que Tous//
+                if (i !== 0) {
+                    const categoryName = button.getAttribute("id");//recup l id du bouton cliquer et le stock dans la var//
+                    const category = allCategorie.find((category) => category.name === categoryName);//cherche la catego qui correspond a la valeur recup precedement et la stock dans la var//
+                    //condi verifie si la categorie a ete trouvé que le bouton cliquer correspond bien a une categorie //
+                    if (category) {
+                        const categoryId = category.id;
+                        createGalleryWithFilter(categoryId);//filtre les elements de la galerie en fonction de lid de la catego//
+                    }
+                    //si l'indice i=0 alors l'user a cliquer sur le bouton tous , tout les elements de la galerie seront donc affichés//
+                } else {
+                    createGallery(allGallery);
+                }
+                selectButton(button);//remplis le bouton cliqué//
+            });
+            filter.appendChild(button);//ajoute button au parent filter// 
+        });
+
+    };
+}
 
 
 //FONCTION POUR LA GALLERIE//
@@ -124,14 +127,19 @@ function hideEdit() {
     const liLogout = document.querySelector('.liLogout');
     const login = document.querySelector('.login');
 
+
+
     // Vérifier si l'utilisateur est connecté en vérifiant la présence du token dans le localStorage//
-    const userToken = localStorage.getItem('user');
+
+    const userToken = localStorage.getItem('user');//getItem pour recup la valeur de la clé user// 
 
     // Si l'utilisateur est connecté, cacher l'élément de connexion (login)//
     if (userToken) {
         if (login !== null) {
             login.style.display = 'none';
         }
+
+
     }
 
     // Si l'utilisateur n'est pas connecté, cacher les autres éléments//
@@ -151,6 +159,7 @@ function hideEdit() {
         if (liLogout !== null) {
             liLogout.style.display = 'none';
         }
+
     }
 }
 
@@ -171,6 +180,7 @@ modaleTriggers.forEach(triger => triger.addEventListener("click", toggleModal))
 function toggleModal() {
     modaleWindow.classList.toggle("active")
     createGalleryModal(allGallery);
+
 }
 
 const modalLink = document.querySelector(".modalLink");
@@ -206,8 +216,8 @@ function createGalleryModal(allGallery) {
 }
 //suppression d'un projet//
 async function deleteProject(e) {
-    const iconDelete = e.target;
-    const imgContainer = iconDelete.parentElement.previousElementSibling;
+    const iconDelete = e.target;//icone de suppression cliqué//
+    const imgContainer = iconDelete.parentElement.previousElementSibling;//recup le container de limg associé a l'icone de suppr//
     const id = imgContainer.dataset.id;
 
     try {
@@ -222,12 +232,13 @@ async function deleteProject(e) {
         if (response.ok) {
             imgContainer.parentElement.remove();
             getWorks();
+
         } else {
             throw new Error("Veuillez vous reconnecter");
         }
     } catch (error) {
         alert(error.message);
-        document.location.href = "login.html";
+        document.location.href = "login.html";//redirection vers la page login en cas d'erreur//
     }
 }
 
@@ -261,6 +272,7 @@ const buttonValidate = document.querySelector('.button-validate');
 function firstModal() {
     modal.style.display = "block";
     modal_add.style.display = "none";
+    resetModal();
 
 }
 
@@ -305,32 +317,42 @@ const selectCategories = document.getElementById("categories");
 
 input_file.addEventListener("change", previewFile);
 
+
+
 function previewFile(e) {
     const file_extension_regex = /\.(jpe?g|png)$/i;//verifie si le fichier correspond au format accepté//
     const max_file_size_in_bytes = 4 * 1024 * 1024; //4mo taille max autorisé//
     if (this.files.length === 0 || !file_extension_regex.test(this.files[0].name) || this.files[0].size > max_file_size_in_bytes) {
         showToast("Format non pris en charge, merci de choisir une autre photo");
+        inputTitle.disabled = true;
+        selectCategories.disabled = true;
         return;//pour arreter l'execution de la fonction si le format n'est pas bon//
     }
 
     let file = e.target.files[0];
     let url = URL.createObjectURL(file);
     displayImg(url);
+    inputTitle.disabled = false;
+    selectCategories.disabled = false;
 
-    //function creer l'img et l'incorporer dans le label//
-
-    function displayImg() {
-        labelFile.style.padding = "0px";
-        img_element.src = url;
-        labelFile.innerHTML = "";
-        labelFile.appendChild(img_element);
-    }
 }
+//function creer l'img et l'incorporer dans le label//
+
+function displayImg(url) {
+    labelFile.style.padding = "0px";
+    img_element.src = url;
+    labelFile.innerHTML = "";
+    labelFile.appendChild(img_element);//ajoute l'element img dans le labelfile ce qui permet d'afficher limage//
+};
+
+
+
 
 
 //function pour activer ou desactiver le bouton valider une fois les condi remplies //
 
 function buttonValidateForm() {
+
     if (inputTitle.value !== "" && selectCategories.value !== "default" && input_file.files.length > 0) {
         buttonValidate.style.background = "#1D6154";
         buttonValidate.disabled = false;
@@ -346,7 +368,7 @@ if (inputTitle !== null) {
     inputTitle.addEventListener('input', buttonValidateForm);
     selectCategories.addEventListener('input', buttonValidateForm);
     input_file.addEventListener('input', buttonValidateForm);
-    formUploadImg.addEventListener('submit', addProject);
+    formUploadImg.addEventListener('submit', addProject);//appel de la fonction addproject quand le form a ete soumis//
 }
 
 // Submit du formulaire et envoie du projet vers la base de données //
@@ -368,10 +390,11 @@ async function addProject(e) {
     })
         .then(response => {
             if (response.ok) {
-                alert('Le projet a bien été ajouté')
+                alert('Le projet a bien été ajouté');
                 getWorks();
-
-                firstModal()
+                resetModal();
+                firstModal();
+                //modaleWindow.classList.remove("active");//
             } else if (!response.ok) {
                 alert("Erreur le projet n'as pas pu etre ajouté");
                 document.location.href = ("login.html");
@@ -379,7 +402,24 @@ async function addProject(e) {
         })
 
 }
+//fonction pour reset le form de la modal add//
+function resetModal() {
+    const imgElement = labelFile.querySelector('img');
+    if (imgElement) {
+        imgElement.remove();
+    }
 
+    labelFile.innerHTML = '<i class="fa-regular fa-image"></i><span class="button-add-picture">+ Ajouter photo</span><span class="format-picture">jpg, png: 4mo max</span>';
+    labelFile.style.padding = "30px 0 20px";
+
+
+    inputTitle.value = "";
+    selectCategories.value = "default";
+    input_file.value = "";
+    buttonValidateForm();
+
+
+}
 
 
 // Fonction de déconnexion//
@@ -388,7 +428,7 @@ function logout() {
     localStorage.removeItem('user');
 
     // Rediriger vers la page d'accueil//
-    window.location.href = '/FrontEnd/index.html';
+    window.location.href = 'index.html';
 }
 
 // Écouter le clic sur l'élément avec la classe .liLogout//

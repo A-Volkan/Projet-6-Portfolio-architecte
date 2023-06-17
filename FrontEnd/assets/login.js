@@ -38,7 +38,7 @@ const loginUser = async () => {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(userLog), // converti userlog en format json et l'ajoute au body de la requete//
+        body: JSON.stringify(userLog), // converti userlog en format json et l'ajoute au body de la requete ,transmet les info de co de l'user au serveur//
 
     })  //fonction de rappel //
         .then((response) => {
@@ -49,7 +49,7 @@ const loginUser = async () => {
                         const userdata = data.token; //extrait le token d'authent et les stock dans la var userdata//
                         //condition qui verif si la valeur userdata est attribué a localstorage , et renvoie vers la page d'acceuil//
                         if (localStorage.user = userdata) {
-                            document.location.href = "/FrontEnd/index.html";
+                            document.location.href = "index.html";
                         }
                     })
                 //condi alternative si la reponse n'est pas un succès// 
