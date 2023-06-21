@@ -34,7 +34,8 @@ const getWorks = async () => {
 
 const createCategory = () => {
     const userToken = localStorage.getItem('user');
-    if (!userToken) {
+    if (!userToken) { //verifie si le token n'est pas present dans le localstorage//
+
         //creer un nouvel element div avec la class filter et l'ajouter a la fin du noeud en lian la classe filter au parent portfolio//
         const filter = document.createElement("div");
         filter.classList.add("filter");
@@ -86,6 +87,12 @@ const createCategory = () => {
                 selectButton(button);//remplis le bouton cliqué//
             });
             filter.appendChild(button);//ajoute button au parent filter// 
+
+            //AJOUT DE LA CLASS SELECTED AU BOUTON 'TOUS' DES LE DEBUT (selectionné par defaut)//
+            if (i == 0) {
+                button.classList.add("selected");
+
+            }
         });
 
     };
@@ -218,7 +225,7 @@ function createGalleryModal(allGallery) {
 async function deleteProject(e) {
     const iconDelete = e.target;//icone de suppression cliqué//
     const imgContainer = iconDelete.parentElement.previousElementSibling;//recup le container de limg associé a l'icone de suppr//
-    const id = imgContainer.dataset.id;
+    const id = imgContainer.dataset.id;//recup l'id du projet a supprimer//
 
     try {
         const response = await fetch(`http://localhost:5678/api/works/${id}`, {
